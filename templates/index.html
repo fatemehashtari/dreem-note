@@ -199,9 +199,9 @@
                 <div class="card-body">
                     <h6 class="note-category">
                         <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" class="note-sticker" alt="sticker" />
-                        دسته: {{ note[3] }}
+                        دسته: {{ note[3]|e }}
                     </h6>
-                    <p class="note-text">{{ note[2] }}</p>
+                    <p class="note-text">{{ note[2]|e }}</p>
                     <div class="d-flex justify-content-between">
                         <a href="/edit/{{ note[0] }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> ویرایش</a>
                         <a href="/delete/{{ note[0] }}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> حذف</a>
