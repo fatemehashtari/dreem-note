@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ویرایش یادداشت - DreamNote</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 60px;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .form-control, .form-select {
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(248, 187, 208, 0.2);
+            border: 1px solid #ccc;
+        }
+        .btn-primary {
+            background-color: #64b5f6;
+            border-color: #64b5f6;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(100, 181, 246, 0.3);
+        }
+        .header-bar {
+            background: linear-gradient(90deg, #64b5f6, #f8bbd0);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(100, 181, 246, 0.4);
+            margin-bottom: 2rem;
+        }
+        .header-bar img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+        }
+        .toolbar button {
+            margin-left: 10px;
+            border: none;
+            background: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #555;
+            transition: color 0.3s;
+        }
+        .toolbar button:hover {
+            color: #007bff;
+        }
+    </style>
+    <script>
+        function formatText(command) {
+            document.execCommand(command, false, null);
+        }
+        function syncEditor() {
+            document.getElementById('hiddenContent').value = document.getElementById('editor').innerHTML;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const initialContent = `{{ content|safe }}`;
+            document.getElementById('editor').innerHTML = initialContent;
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-bar">
+            <img src="https://cdn-icons-png.flaticon.com/512/17230/17230823.png" alt="DreamNote Logo">
+            <h2>ویرایش یادداشت</h2>
+        </div>
+        <form method="post" onsubmit="syncEditor()">
+            <div class="toolbar text-end mb-2">
+                <button type="button" onclick="formatText('bold')" title="Bold"><i class="fas fa-bold"></i></button>
+                <button type="button" onclick="formatText('italic')" title="Italic"><i class="fas fa-italic"></i></button>
+                <button type="button" onclick="formatText('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button>
+                <button type="button" onclick="formatText('justifyLeft')" title="Align Left"><i class="fas fa-align-left"></i></button>
+            </div>
+            <div class="mb-3">
+                <div contenteditable="true" id="editor" class="form-control" style="height: 300px; overflow-y: auto; background: white;"></div>
+                <textarea name="content" id="hiddenContent" style="display:none;"></textarea>
+            </div>
+            <div class="mb-3">
+                <select name="category" class="form-select">
+                    <option value="عمومی" {% if category == "عمومی" %}selected{% endif %}>عمومی</option>
+                    <option value="شخصی" {% if category == "شخصی" %}selected{% endif %}>شخصی</option>
+                    <option value="کار" {% if category == "کار" %}selected{% endif %}>کار</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">ذخیره تغییرات</button>
+        </form>
+    </div>
+</body>
+</html>
