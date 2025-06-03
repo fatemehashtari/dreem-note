@@ -93,6 +93,7 @@ def edit_note(note_id):
             text("UPDATE notes SET content=:content, category=:category WHERE id=:id AND user_id=:user_id"),
             {"content": content, "category": category, "id": note_id, "user_id": session['user_id']}
         )
+        db.session.commit()
         return redirect('/')
     elif request.method == 'GET':
         res = db.session.execute(
